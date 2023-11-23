@@ -8,10 +8,18 @@
 import UIKit
 
 class CWButton: UIButton {
+    enum Icons: String {
+        case info = "info.circle"
+        case pause = "pause.circle"
+        case play = "play.circle"
+        case pointer = "cursorarrow"
+        case returnLeft = "return.left"
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        configure()
+//        configure()
     }
 
 //    @available(*, unavailable)
@@ -20,19 +28,29 @@ class CWButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init(backgroundColor: UIColor, title: String) {
+    init(color: UIColor, title: String, config: Configuration = .tinted(), icon: Icons? = nil) {
         super.init(frame: .zero)
-        configure()
 
-        self.backgroundColor = backgroundColor
+        configuration = config
 
-        setTitle(title, for: .normal)
+        if icon != nil {
+            configuration?.image = UIImage(systemName: icon!.rawValue)
+            configuration?.imagePadding = 10
+        }
+
+        configuration?.baseBackgroundColor = color
+        configuration?.baseForegroundColor = color
+        configuration?.title = title
+        configuration?.cornerStyle = .medium
+
+        translatesAutoresizingMaskIntoConstraints = false // Using auto-layout
     }
 
-    func configure() {
-        layer.cornerRadius = 8
-        titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
-        setTitleColor(.white, for: .normal)
-        translatesAutoresizingMaskIntoConstraints = false // Using auto-layout
+    public func changeIcon(icon: Icons? = nil) {
+        if icon == nil {
+            configuration?.image = nil
+        } else {
+            configuration?.image = UIImage(systemName: icon!.rawValue)
+        }
     }
 }

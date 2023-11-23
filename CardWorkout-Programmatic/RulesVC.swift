@@ -8,7 +8,7 @@
 import UIKit
 
 class RulesVC: UIViewController {
-    let okButton = CWButton(backgroundColor: .systemMint, title: "OK")
+    let okButton = CWButton(color: .systemMint, title: "OK",icon: .returnLeft)
 
     let titleLabel = UILabel()
     let rulesLabel = UILabel()

@@ -10,9 +10,9 @@ import UIKit
 class CardSelectionVC: UIViewController {
     let cardImageView = UIImageView()
 
-    let mainButton = CWButton(backgroundColor: .systemCyan, title: "Start!")
-    let pickButton = CWButton(backgroundColor: .systemBrown, title: "Pick")
-    let rulesButton = CWButton(backgroundColor: .systemBlue, title: "Rules")
+    let mainButton = CWButton(color: .systemCyan, title: "Start!", icon: .play)
+    let pickButton = CWButton(color: .purple, title: "Pick", icon: .pointer)
+    let rulesButton = CWButton(color: .systemBlue, title: "Rules", icon: .info)
 
     let deck = Deck()
     var timer: Timer?
@@ -48,16 +48,19 @@ class CardSelectionVC: UIViewController {
 
     @objc func showRandomCard() {
         cardImageView.image = deck.pickRandomCard()
-        
     }
 
     func toggleMainButton() {
         if timer != nil {
-            mainButton.setTitle("Stop!", for: .normal)
-            mainButton.backgroundColor = .systemRed
+            mainButton.configuration?.title = "Stop!"
+            mainButton.configuration?.baseBackgroundColor = .systemRed
+            mainButton.configuration?.baseForegroundColor = .systemRed
+            mainButton.changeIcon(icon: .pause)
         } else {
-            mainButton.setTitle("Start!", for: .normal)
-            mainButton.backgroundColor = .systemCyan
+            mainButton.configuration?.title = "Start!"
+            mainButton.configuration?.baseBackgroundColor = .systemCyan
+            mainButton.configuration?.baseForegroundColor = .systemCyan
+            mainButton.changeIcon(icon: .play)
         }
     }
 

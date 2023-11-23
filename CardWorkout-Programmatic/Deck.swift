@@ -25,7 +25,7 @@ class Deck {
     private var cards: [UIImage] = []
 
     init() {
-//        createCards()
+        createCards()
     }
 
     func createCards() {
